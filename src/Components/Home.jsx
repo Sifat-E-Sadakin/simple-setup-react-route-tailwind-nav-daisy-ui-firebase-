@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { userContext } from './UserProvider/UserProvider';
 
 const Home = () => {
+
+    let user = useContext(userContext)
     return (
         <div>
-            <h1>HOme</h1>
+            <h1>Hi {user && user.displayName}</h1>
             
         </div>
     );

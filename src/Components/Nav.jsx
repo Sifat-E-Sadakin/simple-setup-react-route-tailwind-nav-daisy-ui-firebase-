@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { userContext } from './UserProvider/UserProvider';
 
 const Nav = () => {
+
+  let {user, logout} = useContext(userContext);
+   console.log(user);
+
+  let logoutHandel =()=>{
+    
+    logout()
+    .then(()=>{
+         window.location.reload(false);
+    })
+    .catch(err=> console.log(err))
+  }
+
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -30,12 +44,25 @@ const Nav = () => {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <Link className='m-1' to='/login'>Login</Link>
-                        <Link className='m-1' to='/'>Home</Link>
+                        {user && <Link className='m-1' to='/'>Home</Link>}
                         <Link className='m-1' to='/singUp'>Sing Up</Link>
+                        <Link className='m-1' to='/orders'>Orders</Link>
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Get started</a>
+                    {
+                     user?
+                     <>
+                      <p>{user.email}</p>
+                     <button className='btn mx-1 btn-sm' onClick={logoutHandel} >Sing Out</button>
+                      </>
+                    :
+                     <>
+                     <button className='btn mx-1 btn-sm' ><Link className='m-1' to='/login'>Login</Link></button>
+                     
+                     </>
+                     }
+
                 </div>
             </div>
 
