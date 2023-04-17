@@ -3,7 +3,7 @@ import { userContext } from './UserProvider/UserProvider';
 
 const SingUp = () => {
 
-    let {createNewUser}= useContext(userContext)
+    let {createNewUser, googlePopUp}= useContext(userContext)
 
     let submit=(event)=>{
 
@@ -62,6 +62,9 @@ const SingUp = () => {
                             </div>
                         </div>
                     </form>
+                    <div className="form-control mt-6">
+                                <button onClick={googlePopUp} className="btn btn-primary">Login google</button>
+                    </div>
                 </div>
             </div>
 
